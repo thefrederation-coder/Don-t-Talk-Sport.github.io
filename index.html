@@ -164,6 +164,17 @@
             embedGoogleMaps(selectedLocation);
         }
 
+        function suggestLocationBasedOnCoordinates(latitude, longitude) {
+            // Replace with actual logic to suggest places based on user's coordinates
+            // For demonstration purposes, we randomly select between non-sport and sport-friendly locations
+            const random = Math.random();
+            if (random < 0.5) {
+                suggestNonSportRelatedLocation();
+            } else {
+                suggestSportFriendlyLocation();
+            }
+        }
+
         printChatMessage("Welcome Fellow fan of anything but sports! Ready to explore kindred spirits?");
 
         setTimeout(() => {
