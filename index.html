@@ -21,13 +21,13 @@
         const submitButton = document.getElementById('submit');
         let canEnterWebsite = false;
 
-        // Function to print messages to the output div
+        // Function to print messages in the output div
         function printMessage(message) {
             output.innerHTML += `<p>${message}</p>`;
             output.scrollTop = output.scrollHeight;
         }
 
-        // Function to check if user's response allows them to enter the website
+        // Function to check if the user's response allows them to enter the website
         function checkResponse(response) {
             if (response.toLowerCase().includes('yes')) {
                 canEnterWebsite = true;
