@@ -48,7 +48,10 @@
             margin-top: 20px;
         }
         .popup-content {
-            max-width: 200px;
+            max-width: 250px; /* Adjusted for better readability */
+        }
+        .popup-content p {
+            margin: 5px 0;
         }
         .train-info, .bus-info, .taxi-info, .uber-info {
             margin-top: 10px;
@@ -101,7 +104,7 @@
             const marker = L.marker([lat, lng]).addTo(mapContainer);
             const popupContent = `<div class="popup-content">
                                     <p><strong>${location.name}</strong></p>
-                                    <p>Estimated Price: ${location.price}</p>
+                                    <p><strong>Estimated Price:</strong> ${location.price}</p>
                                     <button onclick="showDirections(${lat}, ${lng})">Show Directions</button>
                                     <div id="train-info-${location.name.replace(/\s+/g, '-')}" class="train-info"></div>
                                     <div id="bus-info-${location.name.replace(/\s+/g, '-')}" class="bus-info"></div>
@@ -201,6 +204,4 @@
                     waitTime: "15 minutes"
                 };
                 busInfoElement.innerHTML = `<p><strong>Bus Info:</strong></p>
-                                            <p>Nearest Stop: ${busInfo.stop}</p>
-                                            <p>Next Bus: ${busInfo.nextBus}</p>
-                                            <p>Wait Time: ${busInfo.waitTime}</
+                                            <p>Nearest Stop
