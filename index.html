@@ -34,7 +34,7 @@
             if (message === 'yes') {
                 enterMeetingPlace();
             } else {
-                printChatMessage("I'll be waiting...");
+                printChatMessage("Only type 'yes' if you genuinely do.");
             }
             chatInput.value = '';
         });
@@ -42,13 +42,13 @@
         // Function to enter a random meeting place
         function enterMeetingPlace() {
             const meetingPlaces = [
-                "The Mushroom Kingdom",
-                "Hogwarts School of Witchcraft and Wizardry",
-                "The Shire",
-                "Narnia",
-                "Jurassic Park",
-                "Gotham City",
-                "The Death Star"
+                "The Upside Down",
+                "Mordor",
+                "Atlantis",
+                "The Lost City of El Dorado",
+                "Wonderland",
+                "Silent Hill",
+                "The Twilight Zone"
             ];
             const randomIndex = Math.floor(Math.random() * meetingPlaces.length);
             const selectedPlace = meetingPlaces[randomIndex];
@@ -63,7 +63,7 @@
 
         // Simulate initial chat messages after a delay
         setTimeout(() => {
-            printChatMessage("I'll be waiting...");
+            printChatMessage("Only type 'yes' if you genuinely do.");
         }, 1000);
     </script>
 </body>
