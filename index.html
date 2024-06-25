@@ -3,52 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Talk Sport</title>
+    <title>Don't Talk Sport - A Parody</title>
     <style>
         body {
-            font-family: 'Playfair Display', serif; /* Serif font for body text */
-            background-color: #f5e1da; /* Creamy background color */
-            color: #3d3d3b; /* Dark charcoal text color */
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f3f3;
+            color: #222222;
             margin: 0;
             padding: 0;
-            text-align: center;
-            line-height: 1.6; /* Increased line height for readability */
+            line-height: 1.6;
         }
         header {
-            background-color: #705848; /* Dark brown header background */
-            color: #f5e1da;
-            padding: 20px;
-            font-size: 2.5rem; /* Larger header font size */
-            margin-bottom: 20px; /* Space below header */
+            background-color: #e6e6e6;
+            color: #000000;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.8rem;
+            margin: 10px 0;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        nav {
+            background-color: #00449e;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        nav a:hover {
+            color: #f3c623;
         }
         section {
-            padding: 40px 20px; /* Padding around sections */
-            background-color: #eadeda; /* Light beige background color for sections */
-            margin: 20px auto; /* Center sections */
-            max-width: 800px; /* Limit section width */
-            border-radius: 10px; /* Rounded corners */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
-            text-align: left; /* Align text to the left */
+            padding: 40px 20px;
+            background-color: #ffffff;
+            margin: 20px auto;
+            max-width: 900px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
         section h2 {
-            font-family: 'Bebas Neue', sans-serif; /* Bold and sans-serif font for section headings */
-            font-size: 2rem; /* Larger font size for headings */
-            margin-bottom: 10px; /* Space below headings */
+            font-family: 'Arial Black', sans-serif;
+            font-size: 2.2rem;
+            color: #00449e;
+            margin-bottom: 20px;
         }
         section p {
-            font-size: 1.2rem; /* Medium font size for paragraphs */
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
         footer {
-            background-color: #705848; /* Dark brown footer background color */
-            color: #f5e1da;
-            padding: 10px;
-            position: relative; /* Position relative for footer */
-            clear: both; /* Clear floats */
-        }
-        iframe {
-            display: block;
-            margin: 20px auto;
-            max-width: 100%;
+            background-color: #00449e;
+            color: #ffffff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -57,6 +81,13 @@
         <h1>Don't Talk Sport</h1>
         <p>A Safe Haven For Those Who Don't Like Sport</p>
     </header>
+    
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#watchlist">Watch List</a>
+        <a href="#podcast">Podcast</a>
+        <a href="#tunes">Tunes</a>
+    </nav>
     
     <section id="home">
         <h2>Welcome to Don't Talk Sport!</h2>
@@ -68,7 +99,7 @@
     
     <section id="watchlist">
         <h2>Watch List</h2>
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </section>
     
     <section id="podcast">
