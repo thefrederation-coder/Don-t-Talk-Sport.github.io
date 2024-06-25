@@ -64,7 +64,7 @@
     </nav>
     <main>
         <h2>Watch List</h2>
-        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </main>
     <footer>
         <p>&copy; 2024 Don't Talk Sport</p>
