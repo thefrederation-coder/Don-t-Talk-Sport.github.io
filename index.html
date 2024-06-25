@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Don't Talk Sport</title>
+    <title>Don't Talk Sport - Kindred Spirits</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Importing 'Press Start 2P' font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Style for Google Maps iframe */
         .map-container {
             width: 100%;
             height: 400px;
             margin-top: 10px;
         }
     </style>
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <div id="chat-container">
@@ -30,24 +29,13 @@
         const chatInput = document.getElementById('chat-input');
         const chatSubmitButton = document.getElementById('chat-submit');
 
-        // Locations array for Richmond upon Thames with coordinates
-        const locations = [
-            { name: "Richmond Park", coordinates: { lat: 51.4422, lng: -0.2755 } },
-            { name: "Ham House", coordinates: { lat: 51.4387, lng: -0.3142 } },
-            { name: "Twickenham Stadium", coordinates: { lat: 51.4561, lng: -0.3415 } },
-            { name: "Richmond Theatre", coordinates: { lat: 51.4632, lng: -0.3034 } },
-            { name: "Kew Gardens", coordinates: { lat: 51.4787, lng: -0.2962 } },
-            { name: "Teddington Lock", coordinates: { lat: 51.4282, lng: -0.3306 } },
-            { name: "Caffe Mad St. Margarets", coordinates: { lat: 51.4558, lng: -0.3166 } }
-        ];
+        let userLocations = []; // Array to store user-submitted locations
 
-        // Function to print messages in the chat output div
         function printChatMessage(message) {
             chatOutput.innerHTML += `<p>${message}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
         }
 
-        // Function to embed Google Maps for a specific location
         function embedGoogleMaps(location) {
             if (location.coordinates) {
                 const { lat, lng } = location.coordinates;
@@ -59,40 +47,85 @@
             }
         }
 
-        // Event listener for chat submit button click
         chatSubmitButton.addEventListener('click', function() {
             const message = chatInput.value.trim().toLowerCase();
             if (message === 'yes') {
                 enterRandomLocation();
+            } else if (message === 'location') {
+                requestLocationPermission();
             } else {
-                printChatMessage("Only type 'yes' if you really do.");
+                suggestMeetingPlace(message);
             }
             chatInput.value = '';
         });
 
-        // Function to enter a random location in Richmond upon Thames
-        function enterRandomLocation() {
-            const randomIndex = Math.floor(Math.random() * locations.length);
-            const selectedLocation = locations[randomIndex];
-            printChatMessage(`Entering ${selectedLocation.name}...`);
-            setTimeout(() => {
-                if (selectedLocation.name.toLowerCase().includes('caffe mad')) {
-                    // Direct link to Caffe Mad St. Margarets
-                    window.location.href = `https://www.yell.com/biz/caffe-mad-richmond-831790/`;
-                } else {
-                    embedGoogleMaps(selectedLocation);
-                    window.location.href = `${selectedLocation.name.toLowerCase().replace(/\s+/g, '-')}.html`;
-                }
-            }, 2000); // Redirect after 2 seconds
+        function suggestMeetingPlace(place) {
+            printChatMessage(`Suggesting meeting at ${place}...`);
+            userLocations.push(place); // Add user-submitted place to array
+            printChatMessage("Let's decide on a place to meet.");
         }
 
-        // Initial message in the chat
+        function requestLocationPermission() {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        printChatMessage(`Your location: Latitude ${latitude}, Longitude ${longitude}`);
+                        // Optionally, you can use this location data for further actions
+                    },
+                    (error) => {
+                        console.error('Error getting location:', error);
+                        printChatMessage('Failed to retrieve your location.');
+                    }
+                );
+            } else {
+                printChatMessage('Geolocation is not supported by your browser.');
+            }
+        }
+
+        function enterKindredSpirits() {
+            printChatMessage("Exploring Kindred Spirits...");
+            // Redirect or show content related to Kindred Spirits
+            // For offline usage, handle navigation within the app
+            window.location.href = "kindred-spirits.html";
+        }
+
+        function enterRandomLocation() {
+            printChatMessage("Entering a random location...");
+            const randomIndex = Math.floor(Math.random() * userLocations.length);
+            const selectedLocation = userLocations[randomIndex];
+            setTimeout(() => {
+                if (selectedLocation && selectedLocation.toLowerCase().includes('caffe mad')) {
+                    window.location.href = `https://www.yell.com/biz/caffe-mad-richmond-831790/`;
+                } else if (selectedLocation) {
+                    embedGoogleMaps({ name: selectedLocation, coordinates: null }); // Simulate embedding for user-submitted location
+                    enterKindredSpirits(); // Redirect to Kindred Spirits page
+                } else {
+                    printChatMessage("No user-submitted locations available.");
+                }
+            }, 2000);
+        }
+
         printChatMessage("Welcome! Do you not like sports? (Type 'yes' to proceed)");
 
-        // Simulate initial chat messages after a delay
         setTimeout(() => {
-            printChatMessage("Only type 'yes' if you really do.");
+            printChatMessage("Type 'location' to share your current location or suggest a place.");
         }, 1000);
+    </script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
     </script>
 </body>
 </html>
