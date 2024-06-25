@@ -9,3 +9,166 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .game-interface {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .game-buttons {
+            margin-top: 10px;
+        }
+        .game-buttons button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .game-buttons button:hover {
+            background-color: #45a049;
+        }
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+    </style>
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="game-interface">
+        <h1>Sports is a No Go</h1>
+        <p>Welcome Fellow fan of anything but sports! Ready to explore kindred spirits?</p>
+        <div id="chat-container">
+            <div id="chat-output"></div>
+        </div>
+        <div class="game-buttons">
+            <button id="find-location">Find Nearby Place</button>
+            <button id="suggest-place">Suggest Place</button>
+        </div>
+        <div class="map-container" id="map-container"></div>
+        <div id="user-submitted-locations" style="margin-top: 20px;"></div>
+    </div>
+
+    <audio id="background-audio" src="audio/background-music.mp3" autoplay loop></audio>
+
+    <!-- Optional: Add scripts for additional functionality if needed -->
+    <script>
+        const chatOutput = document.getElementById('chat-output');
+        const findLocationButton = document.getElementById('find-location');
+        const suggestPlaceButton = document.getElementById('suggest-place');
+        const mapContainer = document.getElementById('map-container');
+        const userSubmittedLocations = document.getElementById('user-submitted-locations');
+
+        let locations = [
+            { name: "Art Gallery", coordinates: { lat: 51.5074, lng: -0.1278 } },
+            { name: "Coffee Shop", coordinates: { lat: 51.5138, lng: -0.0984 } },
+            { name: "Park", coordinates: { lat: 51.5033, lng: -0.1195 } }
+        ];
+
+        function printChatMessage(message) {
+            chatOutput.innerHTML += `<p>${message}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        function embedGoogleMaps(location) {
+            if (location.coordinates) {
+                const { lat, lng } = location.coordinates;
+                const mapEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${lat},${lng}&zoom=15`;
+                const mapEmbedCode = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapEmbedUrl}" allowfullscreen></iframe>`;
+                mapContainer.innerHTML = mapEmbedCode;
+            } else {
+                printChatMessage(`No coordinates available for ${location.name}`);
+            }
+        }
+
+        findLocationButton.addEventListener('click', () => {
+            findNearbyPlace();
+        });
+
+        suggestPlaceButton.addEventListener('click', () => {
+            suggestPlace();
+        });
+
+        function findNearbyPlace() {
+            // Simulate finding nearby places (replace with your logic)
+            const nearbyPlaces = [
+                { name: "Art Gallery", coordinates: { lat: 51.5074, lng: -0.1278 } },
+                { name: "Coffee Shop", coordinates: { lat: 51.5138, lng: -0.0984 } },
+                { name: "Park", coordinates: { lat: 51.5033, lng: -0.1195 } }
+            ];
+            const randomIndex = Math.floor(Math.random() * nearbyPlaces.length);
+            const selectedPlace = nearbyPlaces[randomIndex];
+            printChatMessage(`Found nearby place: ${selectedPlace.name}`);
+            embedGoogleMaps(selectedPlace);
+        }
+
+        function suggestPlace() {
+            // Simulate suggesting a place (replace with your logic)
+            const suggestedPlaces = [
+                { name: "Friendly Sports Bar", coordinates: { lat: 51.5113, lng: -0.1282 } },
+                { name: "Art Museum", coordinates: { lat: 51.5107, lng: -0.0741 } },
+                { name: "Bookstore", coordinates: { lat: 51.5173, lng: -0.1161 } }
+            ];
+            const randomIndex = Math.floor(Math.random() * suggestedPlaces.length);
+            const suggestedPlace = suggestedPlaces[randomIndex];
+            printChatMessage(`Suggested place: ${suggestedPlace.name}`);
+            embedGoogleMaps(suggestedPlace);
+        }
+
+        function addLocation(name, coordinates) {
+            // Add a user-submitted location
+            locations.push({ name, coordinates });
+            displayUserSubmittedLocations();
+        }
+
+        function displayUserSubmittedLocations() {
+            // Display user-submitted locations
+            userSubmittedLocations.innerHTML = "<h3>User Submitted Locations:</h3>";
+            locations.forEach(location => {
+                const locationDiv = document.createElement('div');
+                locationDiv.innerHTML = `<p>${location.name}</p>`;
+                userSubmittedLocations.appendChild(locationDiv);
+            });
+        }
+
+        // Initial display of user-submitted locations
+        displayUserSubmittedLocations();
+
+        printChatMessage("Welcome Fellow fan of anything but sports! Ready to explore kindred spirits?");
+
+        setTimeout(() => {
+            printChatMessage("Click 'Find Nearby Place' or 'Suggest Place' to get started.");
+        }, 1000);
+    </script>
+</body>
+</html>
