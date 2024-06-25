@@ -1,42 +1,83 @@
-const output = document.getElementById('output');
-const input = document.getElementById('input');
-const submitButton = document.getElementById('submit');
-let canEnterWebsite = false;
-
-// Function to print messages to the output div
-function printMessage(message) {
-    output.innerHTML += `<p>${message}</p>`;
-    output.scrollTop = output.scrollHeight;
+body {
+    font-family: 'Press Start 2P', cursive;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
-// Function to check if user's response allows them to enter the website
-function checkResponse(response) {
-    if (response.toLowerCase().includes('yes')) {
-        canEnterWebsite = true;
-        printMessage("Great! Let's enter the website.");
-        setTimeout(() => {
-            window.location.href = "welcome.html"; // Redirect to the main website page
-        }, 2000);
-    } else {
-        printMessage("Sorry, this website is only for those who don't like sport. Please come back later.");
-        setTimeout(() => {
-            window.location.reload(); // Reloads the page to try again
-        }, 2000);
+#game-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#output {
+    margin-bottom: 20px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: #fff;
+}
+
+#input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 60%;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #fff;
+}
+
+#submit {
+    padding: 10px 20px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #555;
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    body,
+    #game-container {
+        background-color: #111;
+        color: #fff;
+    }
+
+    #output {
+        background-color: #222;
+        border-color: #444;
+    }
+
+    #input {
+        background-color: #333;
+    }
+
+    #submit {
+        background-color: #444;
+    }
+
+    #submit:hover {
+        background-color: #666;
     }
 }
 
-// Event listener for submit button click
-submitButton.addEventListener('click', function() {
-    const response = input.value.trim();
-    if (response !== '') {
-        printMessage(`You: ${response}`);
-        if (!canEnterWebsite) {
-            checkResponse(response);
-        }
-        input.value = '';
+/* Responsive Design */
+@media (max-width: 768px) {
+    #input {
+        width: 100%;
     }
-});
-
-// Initial message prompting the user
-printMessage("Welcome to Don't Talk Sport - Text Adventure!");
-printMessage("Do you not like sport? (Type 'yes' or 'no')");
+}
