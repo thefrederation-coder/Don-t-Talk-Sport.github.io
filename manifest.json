@@ -1,14 +1,20 @@
 {
     "name": "Sports is a No Go",
-    "short_name": "NoGo",
+    "short_name": "No Sports",
+    "description": "Explore kindred spirits and find non-sport-related places.",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#333",
-    "theme_color": "#4CAF50",
+    "background_color": "#f0f0f0",
+    "theme_color": "#333",
     "icons": [
         {
-            "src": "path/to/icon.png",
+            "src": "/icons/icon-192x192.png",
             "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
             "type": "image/png"
         }
     ]
