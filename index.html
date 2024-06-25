@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,6 +47,12 @@
         #user-submitted-locations {
             margin-top: 20px;
         }
+        .popup-content {
+            max-width: 200px;
+        }
+        .train-info, .bus-info, .taxi-info, .uber-info {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -76,9 +81,9 @@
         const userSubmittedLocations = document.getElementById('user-submitted-locations');
 
         let locations = [
-            { name: "Art Gallery", coordinates: { lat: 51.5074, lng: -0.1278 } },
-            { name: "Coffee Shop", coordinates: { lat: 51.5138, lng: -0.0984 } },
-            { name: "Park", coordinates: { lat: 51.5033, lng: -0.1195 } }
+            { name: "Art Gallery", coordinates: { lat: 51.5074, lng: -0.1278 }, price: "Free" },
+            { name: "Coffee Shop", coordinates: { lat: 51.5138, lng: -0.0984 }, price: "$$" },
+            { name: "Park", coordinates: { lat: 51.5033, lng: -0.1195 }, price: "Free" }
         ];
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -94,7 +99,19 @@
         function displayLocationOnMap(location) {
             const { lat, lng } = location.coordinates;
             const marker = L.marker([lat, lng]).addTo(mapContainer);
-            marker.bindPopup(location.name).openPopup();
+            const popupContent = `<div class="popup-content">
+                                    <p><strong>${location.name}</strong></p>
+                                    <p>Estimated Price: ${location.price}</p>
+                                    <button onclick="showDirections(${lat}, ${lng})">Show Directions</button>
+                                    <div id="train-info-${location.name.replace(/\s+/g, '-')}" class="train-info"></div>
+                                    <div id="bus-info-${location.name.replace(/\s+/g, '-')}" class="bus-info"></div>
+                                    <div id="taxi-info-${location.name.replace(/\s+/g, '-')}" class="taxi-info"></div>
+                                    <div id="uber-info-${location.name.replace(/\s+/g, '-')}" class="uber-info"></div>
+                                  </div>`;
+            marker.bindPopup(popupContent).openPopup();
+            fetchTransitInfo(location.name, lat, lng); // Fetch transit information for this location
+            fetchTaxiInfo(location.name, lat, lng); // Fetch taxi information for this location
+            fetchUberInfo(location.name, lat, lng); // Fetch Uber information for this location
         }
 
         findLocationButton.addEventListener('click', () => {
@@ -115,9 +132,9 @@
         function suggestPlace() {
             // Simulate suggesting a place (replace with your logic)
             const suggestedPlaces = [
-                { name: "Friendly Sports Bar", coordinates: { lat: 51.5113, lng: -0.1282 } },
-                { name: "Art Museum", coordinates: { lat: 51.5107, lng: -0.0741 } },
-                { name: "Bookstore", coordinates: { lat: 51.5173, lng: -0.1161 } }
+                { name: "Friendly Sports Bar", coordinates: { lat: 51.5113, lng: -0.1282 }, price: "$$$" },
+                { name: "Art Museum", coordinates: { lat: 51.5107, lng: -0.0741 }, price: "$" },
+                { name: "Bookstore", coordinates: { lat: 51.5173, lng: -0.1161 }, price: "$$" }
             ];
             const randomIndex = Math.floor(Math.random() * suggestedPlaces.length);
             const suggestedPlace = suggestedPlaces[randomIndex];
@@ -125,9 +142,9 @@
             displayLocationOnMap(suggestedPlace);
         }
 
-        function addLocation(name, coordinates) {
+        function addLocation(name, coordinates, price) {
             // Add a user-submitted location
-            locations.push({ name, coordinates });
+            locations.push({ name, coordinates, price });
             displayUserSubmittedLocations();
         }
 
@@ -136,7 +153,7 @@
             userSubmittedLocations.innerHTML = "<h3>User Submitted Locations:</h3>";
             locations.forEach(location => {
                 const locationDiv = document.createElement('div');
-                locationDiv.innerHTML = `<p>${location.name}</p>`;
+                locationDiv.innerHTML = `<p>${location.name} - Estimated Price: ${location.price}</p>`;
                 userSubmittedLocations.appendChild(locationDiv);
             });
         }
@@ -149,6 +166,41 @@
         setTimeout(() => {
             printChatMessage("Click 'Find Nearby Place' or 'Suggest Place' to get started.");
         }, 1000);
-    </script>
-</body>
-</html>
+
+        function showDirections(lat, lng) {
+            // OpenStreetMap doesn't provide built-in direction functionality, you would need to implement this using an external service
+            // Here, we simulate opening Google Maps directions with the coordinates
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+            window.open(url, '_blank');
+        }
+
+        function fetchTransitInfo(locationName, lat, lng) {
+            // Simulating fetching transit information using a dummy API endpoint
+            const apiKey = 'your_api_key'; // Replace with your actual API key if using a real service
+
+            // Simulating a dummy API request for train info (replace with actual fetch request to your API)
+            setTimeout(() => {
+                const trainInfoElement = document.getElementById(`train-info-${locationName.replace(/\s+/g, '-')}`);
+                const trainInfo = {
+                    station: "Nearest Train Station",
+                    departureTime: "09:00 AM",
+                    duration: "30 minutes"
+                };
+                trainInfoElement.innerHTML = `<p><strong>Train Info:</strong></p>
+                                              <p>Nearest Station: ${trainInfo.station}</p>
+                                              <p>Departure Time: ${trainInfo.departureTime}</p>
+                                              <p>Duration: ${trainInfo.duration}</p>`;
+            }, 1500); // Simulate delay for fetching data
+
+            // Simulating a dummy API request for bus info (replace with actual fetch request to your API)
+            setTimeout(() => {
+                const busInfoElement = document.getElementById(`bus-info-${locationName.replace(/\s+/g, '-')}`);
+                const busInfo = {
+                    stop: "Nearest Bus Stop",
+                    nextBus: "09:15 AM",
+                    waitTime: "15 minutes"
+                };
+                busInfoElement.innerHTML = `<p><strong>Bus Info:</strong></p>
+                                            <p>Nearest Stop: ${busInfo.stop}</p>
+                                            <p>Next Bus: ${busInfo.nextBus}</p>
+                                            <p>Wait Time: ${busInfo.waitTime}</
