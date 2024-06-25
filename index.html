@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sports is a No Go - Kindred Spirits</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,31 +38,16 @@
         .game-buttons button:hover {
             background-color: #45a049;
         }
-        .map-container {
+        #map {
             width: 100%;
             height: 400px;
             margin-top: 20px;
             border-radius: 10px;
-            overflow: hidden;
+        }
+        #user-submitted-locations {
+            margin-top: 20px;
         }
     </style>
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="/manifest.json">
-
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(registration => {
-                        console.log('Service Worker registered:', registration);
-                    })
-                    .catch(error => {
-                        console.error('Service Worker registration failed:', error);
-                    });
-            });
-        }
-    </script>
 </head>
 <body>
     <div class="game-interface">
@@ -75,18 +60,18 @@
             <button id="find-location">Find Nearby Place</button>
             <button id="suggest-place">Suggest Place</button>
         </div>
-        <div class="map-container" id="map-container"></div>
-        <div id="user-submitted-locations" style="margin-top: 20px;"></div>
+        <div id="map"></div>
+        <div id="user-submitted-locations"></div>
     </div>
 
     <audio id="background-audio" src="audio/background-music.mp3" autoplay loop></audio>
 
-    <!-- Optional: Add scripts for additional functionality if needed -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
         const chatOutput = document.getElementById('chat-output');
         const findLocationButton = document.getElementById('find-location');
         const suggestPlaceButton = document.getElementById('suggest-place');
-        const mapContainer = document.getElementById('map-container');
+        const mapContainer = L.map('map').setView([51.505, -0.09], 13);
         const userSubmittedLocations = document.getElementById('user-submitted-locations');
 
         let locations = [
@@ -95,20 +80,21 @@
             { name: "Park", coordinates: { lat: 51.5033, lng: -0.1195 } }
         ];
 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapContainer);
+
         function printChatMessage(message) {
             chatOutput.innerHTML += `<p>${message}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
         }
 
-        function embedGoogleMaps(location) {
-            if (location.coordinates) {
-                const { lat, lng } = location.coordinates;
-                const mapEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${lat},${lng}&zoom=15`;
-                const mapEmbedCode = `<iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapEmbedUrl}" allowfullscreen></iframe>`;
-                mapContainer.innerHTML = mapEmbedCode;
-            } else {
-                printChatMessage(`No coordinates available for ${location.name}`);
-            }
+        function displayLocationOnMap(location) {
+            const { lat, lng } = location.coordinates;
+            L.marker([lat, lng]).addTo(mapContainer)
+                .bindPopup(location.name)
+                .openPopup();
         }
 
         findLocationButton.addEventListener('click', () => {
@@ -120,16 +106,10 @@
         });
 
         function findNearbyPlace() {
-            // Simulate finding nearby places (replace with your logic)
-            const nearbyPlaces = [
-                { name: "Art Gallery", coordinates: { lat: 51.5074, lng: -0.1278 } },
-                { name: "Coffee Shop", coordinates: { lat: 51.5138, lng: -0.0984 } },
-                { name: "Park", coordinates: { lat: 51.5033, lng: -0.1195 } }
-            ];
-            const randomIndex = Math.floor(Math.random() * nearbyPlaces.length);
-            const selectedPlace = nearbyPlaces[randomIndex];
+            const randomIndex = Math.floor(Math.random() * locations.length);
+            const selectedPlace = locations[randomIndex];
             printChatMessage(`Found nearby place: ${selectedPlace.name}`);
-            embedGoogleMaps(selectedPlace);
+            displayLocationOnMap(selectedPlace);
         }
 
         function suggestPlace() {
@@ -142,7 +122,7 @@
             const randomIndex = Math.floor(Math.random() * suggestedPlaces.length);
             const suggestedPlace = suggestedPlaces[randomIndex];
             printChatMessage(`Suggested place: ${suggestedPlace.name}`);
-            embedGoogleMaps(suggestedPlace);
+            displayLocationOnMap(suggestedPlace);
         }
 
         function addLocation(name, coordinates) {
