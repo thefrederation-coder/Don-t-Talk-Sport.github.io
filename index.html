@@ -3,45 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Watch List - Don't Talk Sport</title>
+    <title>Don't Talk Sport</title>
     <style>
         body {
-            font-family: 'Roboto', Arial, Helvetica, sans-serif; /* Changing font-family to Roboto */
-            background-color: #FF69B4;
-            color: #000000;
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif; /* Changing font-family to Montserrat */
+            background-color: #f4efe9; /* Soft cream background */
+            color: #1d1d1b; /* Dark charcoal text color */
             margin: 0;
             padding: 0;
             text-align: center;
+            line-height: 1.6; /* Increased line height for readability */
         }
         header {
-            background-color: #FFD700;
-            color: #00008B;
+            background-color: #c1a573; /* Brownish header background */
+            color: #1d1d1b;
             padding: 20px;
+            font-size: 2.5rem; /* Larger header font size */
+            font-family: 'Playfair Display', serif; /* Serif font for header */
         }
         nav {
-            background-color: #8A2BE2;
+            background-color: #a8c9c2; /* Greenish navigation background */
             padding: 10px;
         }
         nav a {
-            color: #FFFFFF;
+            color: #1d1d1b;
             text-decoration: none;
             margin: 0 10px;
             font-weight: bold;
+            font-family: 'Bebas Neue', sans-serif; /* Bold and sans-serif font for navigation */
+            letter-spacing: 2px; /* Spaced out letters */
+            text-transform: uppercase; /* Uppercase navigation text */
+            font-size: 1.2rem; /* Smaller navigation font size */
         }
         nav a:hover {
-            color: #FFD700;
+            color: #c1a573; /* Hover color change */
         }
-        main {
+        section {
             padding: 20px;
-            background-color: #87CEEB;
+            background-color: #f4efe9; /* Matching background color */
+            margin: 20px auto;
+            max-width: 800px; /* Center content and limit width */
+            text-align: left; /* Align text to the left within sections */
+            border-radius: 10px; /* Rounded corners for sections */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
         }
         footer {
-            background-color: #FFD700;
-            color: #00008B;
+            background-color: #c1a573; /* Footer background color */
+            color: #1d1d1b;
             padding: 10px;
             position: fixed;
             bottom: 0;
             width: 100%;
+            font-size: 0.8rem; /* Smaller footer text */
         }
         iframe {
             display: block;
@@ -56,18 +69,43 @@
         <p>A Safe Haven For Those Who Don't Like Sport</p>
     </header>
     <nav>
-        <a href="index.html">Home</a>
-        <a href="watchlist.html">Watch List</a>
-        <a href="podcast.html">Podcast</a>
-        <a href="tunes.html">Tunes</a>
+        <a href="#home">Home</a>
+        <a href="#watchlist">Watch List</a>
+        <a href="#podcast">Podcast</a>
+        <a href="#tunes">Tunes</a>
     </nav>
-    <main>
+    
+    <section id="home">
+        <h2>Welcome to Don't Talk Sport!</h2>
+        <p>
+            Welcome to our safe haven for those who prefer other forms of entertainment over sports. 
+            Enjoy browsing our curated content and feel free to explore what we have to offer!
+        </p>
+    </section>
+    
+    <section id="watchlist">
         <h2>Watch List</h2>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </main>
+    </section>
+    
+    <section id="podcast">
+        <h2>Podcast</h2>
+        <p>
+            Explore our latest podcast episodes where we discuss everything from music to movies,
+            and everything in between. Stay tuned for more updates!
+        </p>
+    </section>
+    
+    <section id="tunes">
+        <h2>Tunes</h2>
+        <p>
+            Discover our hand-picked selection of tunes that will keep you entertained and 
+            in high spirits. Whether you're into jazz, rock, or pop, we have something for you!
+        </p>
+    </section>
+    
     <footer>
         <p>&copy; 2024 Don't Talk Sport</p>
     </footer>
 </body>
 </html>
-
