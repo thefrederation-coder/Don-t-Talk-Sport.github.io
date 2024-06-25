@@ -1,13 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch List - Don't Talk Sport</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        iframe {
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
 <body>
-
-<title>Watch List</title>
-
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-<p>My first paragraph.</p>
-
+    <header>
+        <h1>Don't Talk Sport</h1>
+        <p>A Safe Haven For Those Who Don't Like Sport</p>
+    </header>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="watch_list.html">Watch List</a>
+        <a href="podcast.html">Podcast</a>
+        <a href="tunes.html">Tunes</a>
+    </nav>
+    <main>
+        <h2>Watch List</h2>
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/videoseries?si=HsL2vmrllAtmXP1u&amp;list=PL3cKwROW1plcdSA0lWWobbtzUbHtrzuaY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </main>
+    <footer>
+        <p>&copy; 2024 Don't Talk Sport</p>
+    </footer>
 </body>
 </html>
-​
-​
