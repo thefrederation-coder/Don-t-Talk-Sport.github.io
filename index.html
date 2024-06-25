@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
     <!-- Importing 'Press Start 2P' font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Style for Google Maps iframe */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div id="chat-container">
@@ -22,21 +30,33 @@
         const chatInput = document.getElementById('chat-input');
         const chatSubmitButton = document.getElementById('chat-submit');
 
-        // Locations array for Richmond upon Thames
+        // Locations array for Richmond upon Thames with coordinates
         const locations = [
-            "Richmond Park",
-            "Ham House",
-            "Twickenham Stadium",
-            "Richmond Theatre",
-            "Kew Gardens",
-            "Teddington Lock",
-            "Caffe Mad (ironically)"
+            { name: "Richmond Park", coordinates: { lat: 51.4422, lng: -0.2755 } },
+            { name: "Ham House", coordinates: { lat: 51.4387, lng: -0.3142 } },
+            { name: "Twickenham Stadium", coordinates: { lat: 51.4561, lng: -0.3415 } },
+            { name: "Richmond Theatre", coordinates: { lat: 51.4632, lng: -0.3034 } },
+            { name: "Kew Gardens", coordinates: { lat: 51.4787, lng: -0.2962 } },
+            { name: "Teddington Lock", coordinates: { lat: 51.4282, lng: -0.3306 } },
+            { name: "Caffe Mad St. Margarets", coordinates: { lat: 51.4558, lng: -0.3166 } }
         ];
 
         // Function to print messages in the chat output div
         function printChatMessage(message) {
             chatOutput.innerHTML += `<p>${message}</p>`;
             chatOutput.scrollTop = chatOutput.scrollHeight;
+        }
+
+        // Function to embed Google Maps for a specific location
+        function embedGoogleMaps(location) {
+            if (location.coordinates) {
+                const { lat, lng } = location.coordinates;
+                const mapEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${lat},${lng}&zoom=15`;
+                const mapEmbedCode = `<div class="map-container"><iframe width="100%" height="100%" frameborder="0" style="border:0" src="${mapEmbedUrl}" allowfullscreen></iframe></div>`;
+                chatOutput.innerHTML += mapEmbedCode;
+            } else {
+                printChatMessage(`No coordinates available for ${location.name}`);
+            }
         }
 
         // Event listener for chat submit button click
@@ -54,12 +74,14 @@
         function enterRandomLocation() {
             const randomIndex = Math.floor(Math.random() * locations.length);
             const selectedLocation = locations[randomIndex];
-            printChatMessage(`Entering ${selectedLocation}...`);
+            printChatMessage(`Entering ${selectedLocation.name}...`);
             setTimeout(() => {
-                if (selectedLocation.toLowerCase().includes('caffe mad')) {
+                if (selectedLocation.name.toLowerCase().includes('caffe mad')) {
+                    // Direct link to Caffe Mad St. Margarets
                     window.location.href = `https://www.yell.com/biz/caffe-mad-richmond-831790/`;
                 } else {
-                    window.location.href = `${selectedLocation.toLowerCase().replace(/\s+/g, '-')}.html`;
+                    embedGoogleMaps(selectedLocation);
+                    window.location.href = `${selectedLocation.name.toLowerCase().replace(/\s+/g, '-')}.html`;
                 }
             }, 2000); // Redirect after 2 seconds
         }
