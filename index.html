@@ -48,6 +48,21 @@
     </style>
     <!-- Web App Manifest -->
     <link rel="manifest" href="/manifest.json">
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="game-interface">
@@ -67,8 +82,6 @@
 
     <audio id="background-audio" src="audio/background-music.mp3" autoplay loop></audio>
 
-    <script>
-        const chatOutput = document.getElementById('chat-output');
-        const chatInput = document.getElementById('chat-input');
-        const chatSubmitButton = document.getElementById('chat-submit');
-        const find
+    <!-- Optional: Add scripts for additional functionality if needed -->
+</body>
+</html>
