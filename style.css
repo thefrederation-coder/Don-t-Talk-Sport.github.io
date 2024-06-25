@@ -1,7 +1,7 @@
-
 body {
     font-family: 'Press Start 2P', cursive;
-    background-color: #f4f4f4;
+    background-color: #000;
+    color: #fff;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
@@ -15,4 +15,66 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
-    z-index:
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: bold;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    position: relative;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #444;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #555;
+}
+
+main {
+    padding: 20px;
+}
+
+.featured {
+    background-color: #111;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-radius: 10px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.featured h1 {
+    color: #fff;
+    font-size: 2.5em;
+}
+
+.parody-message {
+    font-size: 0.9em;
+    color: #aaa;
+    margin-top: 20px;
+    animation: fadeIn 2.5s ease-in-out;
+}
+
+.articles {
+    display: flex;
+    justify-content
