@@ -3,68 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Talk Sport - Text Adventure</title>
+    <title>Welcome to Don't Talk Sport</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Importing 'Press Start 2P' font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="game-container">
-        <div id="output"></div>
-        <input type="text" id="input" placeholder="Type your response...">
-        <button id="submit">Submit</button>
+    <div id="chat-container">
+        <div id="chat-output"></div>
+        <input type="text" id="chat-input" placeholder="Type your message...">
+        <button id="chat-submit">Send</button>
     </div>
 
     <audio id="background-audio" src="audio/background-music.mp3" autoplay loop></audio>
 
     <script>
-        const output = document.getElementById('output');
-        const input = document.getElementById('input');
-        const submitButton = document.getElementById('submit');
-        let canEnterWebsite = false;
+        const chatOutput = document.getElementById('chat-output');
+        const chatInput = document.getElementById('chat-input');
+        const chatSubmitButton = document.getElementById('chat-submit');
 
-        // Function to print messages in the output div
-        function printMessage(message) {
-            output.innerHTML += `<p>${message}</p>`;
-            output.scrollTop = output.scrollHeight;
+        // Function to print messages in the chat output div
+        function printChatMessage(message) {
+            chatOutput.innerHTML += `<p>${message}</p>`;
+            chatOutput.scrollTop = chatOutput.scrollHeight;
         }
 
-        // Function to check if the user's response allows them to enter the website
-        function checkResponse(response) {
-            if (response.toLowerCase().includes('yes')) {
-                canEnterWebsite = true;
-                printMessage("Great! Let's enter the main Don't Talk Sport page.");
-                setTimeout(() => {
-                    window.location.href = "welcome.html"; // Redirect to the main Don't Talk Sport page
-                }, 2000);
+        // Event listener for chat submit button click
+        chatSubmitButton.addEventListener('click', function() {
+            const message = chatInput.value.trim().toLowerCase();
+            if (message === 'yes') {
+                enterMeetingPlace();
             } else {
-                printMessage("Sorry, this website is only for those who don't like sport. Please come back later.");
-                setTimeout(() => {
-                    window.location.reload(); // Reloads the page to try again
-                }, 2000);
+                printChatMessage("I'll be waiting...");
             }
+            chatInput.value = '';
+        });
+
+        // Function to enter a random meeting place
+        function enterMeetingPlace() {
+            const meetingPlaces = [
+                "The Mushroom Kingdom",
+                "Hogwarts School of Witchcraft and Wizardry",
+                "The Shire",
+                "Narnia",
+                "Jurassic Park",
+                "Gotham City",
+                "The Death Star"
+            ];
+            const randomIndex = Math.floor(Math.random() * meetingPlaces.length);
+            const selectedPlace = meetingPlaces[randomIndex];
+            printChatMessage(`Entering ${selectedPlace}...`);
+            setTimeout(() => {
+                window.location.href = `${selectedPlace.toLowerCase().replace(/\s+/g, '-')}.html`;
+            }, 2000); // Redirect to the selected place after 2 seconds
         }
 
-        // Event listener for submit button click
-        submitButton.addEventListener('click', function() {
-            const response = input.value.trim();
-            if (response !== '') {
-                printMessage(`You: ${response}`);
-                if (!canEnterWebsite) {
-                    checkResponse(response);
-                }
-                input.value = '';
-            }
-        });
+        // Initial message in the chat
+        printChatMessage("Welcome! Do you not like sports? (Type 'yes' to proceed)");
 
-        // Event listener for pressing Enter in the input field
-        input.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                submitButton.click(); // Simulate click on submit button
-            }
-        });
-
-        // Initial message prompting the user
-        printMessage("Welcome to Don't Talk Sport - Text Adventure!");
-        printMessage("Do you not like sport? (Type 'yes' or 'no')");
+        // Simulate initial chat messages after a delay
+        setTimeout(() => {
+            printChatMessage("I'll be waiting...");
+        }, 1000);
     </script>
 </body>
 </html>
