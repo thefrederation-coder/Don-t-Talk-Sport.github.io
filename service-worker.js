@@ -1,24 +1,24 @@
-// Service Worker to cache resources for offline use
-const CACHE_NAME = 'sports-is-a-no-go-cache-v1';
+const CACHE_NAME = 'sports-no-go-cache-v1';
 const urlsToCache = [
     '/',
     '/index.html',
     '/styles.css',
-    '/audio/background-music.mp3',
-    '/manifest.json',
-    // Add other resources to cache as needed
+    '/audio/background-music.mp3', // Update with your actual paths
+    // Add other resources (like images, icons, etc.) that should be cached
 ];
 
-self.addEventListener('install', event => {
+self.addEventListener('install', (event) => {
+    // Perform install steps
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(cache => {
+                console.log('Opened cache');
                 return cache.addAll(urlsToCache);
             })
     );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener('fetch', (event) => {
     event.respondWith(
         caches.match(event.request)
             .then(response => {
@@ -26,7 +26,27 @@ self.addEventListener('fetch', event => {
                 if (response) {
                     return response;
                 }
-                return fetch(event.request);
+
+                // Clone the request
+                const fetchRequest = event.request.clone();
+
+                return fetch(fetchRequest)
+                    .then(response => {
+                        // Check if we received a valid response
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+
+                        // Clone the response
+                        const responseToCache = response.clone();
+
+                        caches.open(CACHE_NAME)
+                            .then(cache => {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        return response;
+                    });
             })
     );
 });
