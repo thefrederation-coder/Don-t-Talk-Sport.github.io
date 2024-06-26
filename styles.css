@@ -1,83 +1,79 @@
 body {
-    font-family: 'Press Start 2P', cursive;
-    background-color: #000;
-    color: #fff;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f4f4f4;
 }
 
-#game-container {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
     text-align: center;
 }
 
-#output {
-    margin-bottom: 20px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #444;
-    background-color: #111;
-    color: #fff;
+.slogan {
+    font-style: italic;
 }
 
-#input {
-    padding: 10px;
-    margin-right: 10px;
-    width: 60%;
-    border: 1px solid #444;
-    background-color: #222;
-    color: #fff;
+nav {
+    background-color: #444;
 }
 
-#submit {
-    padding: 10px 20px;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
 }
 
-#submit:hover {
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+}
+
+nav ul li a:hover {
     background-color: #555;
 }
 
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-    body,
-    #game-container {
-        background-color: #111;
-        color: #fff;
-    }
-
-    #output {
-        background-color: #222;
-        border-color: #444;
-    }
-
-    #input {
-        background-color: #333;
-    }
-
-    #submit {
-        background-color: #444;
-    }
-
-    #submit:hover {
-        background-color: #666;
-    }
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    #input {
-        width: 100%;
-    }
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #333;
+}
+
+article {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+article h3 {
+    margin-top: 0;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
