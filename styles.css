@@ -1,15 +1,17 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #1a1a1a;
+    color: #f4f4f4;
 }
 
 header {
     background-color: #333;
-    color: #fff;
+    color: #00ff00;
     padding: 20px 0;
     text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .slogan {
@@ -18,6 +20,7 @@ header {
 
 nav {
     background-color: #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
@@ -33,10 +36,11 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #00ff00;
     text-decoration: none;
     padding: 15px 20px;
     display: block;
+    transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
@@ -47,6 +51,8 @@ main {
     padding: 20px;
     max-width: 800px;
     margin: 0 auto;
+    background-color: #2a2a2a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 section {
@@ -54,26 +60,31 @@ section {
 }
 
 h2 {
-    color: #333;
+    color: #00ff00;
 }
 
 article {
-    background-color: #fff;
+    background-color: #333;
     padding: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 article h3 {
     margin-top: 0;
 }
 
+article p {
+    line-height: 1.5;
+}
+
 footer {
     background-color: #333;
-    color: #fff;
+    color: #00ff00;
     text-align: center;
     padding: 10px 0;
-    position: fixed;
+    position: relative;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
