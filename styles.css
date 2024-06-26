@@ -1,9 +1,10 @@
 body {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'VT323', monospace;
     margin: 0;
     padding: 0;
     background-color: #000;
     color: #FFF;
+    font-size: 18px;
 }
 
 header {
