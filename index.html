@@ -1,65 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Don't Talk Sport</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
-        .embed-container {
+        /* Common styles */
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            margin-top: 20px;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333; /* Default text color */
         }
-        .embed-container h3 {
-            margin-right: 20px;
+        .container {
+            text-align: center;
         }
-        .image-container {
-            margin-top: 20px;
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
+        p {
+            font-size: 1.2em;
+        }
+
+        /* Style 1: Modern Minimalist */
+        .modern {
+            background-color: #f0f0f0;
+        }
+        .modern .coming-soon {
+            font-weight: bold;
+            color: #007bff;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Style 2: Image Background */
+        .image-bg {
+            background-image: url("your-image.jpg"); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .image-bg .container {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Style 3: Gradient Background */
+        .gradient-bg {
+            background: linear-gradient(to right, #e0eafc, #cfdef3); /* Example gradient */
+        }
+
+
     </style>
 </head>
 <body>
-    <header>
-        <h1>Don't Talk Sport</h1>
-        <p class="slogan">A safe haven for those who don't like sport</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#blog">Blog</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-    <main>
-        <section id="home">
-            <h2>Welcome to Don't Talk Sport</h2>
-            <p>Your go-to place for everything geeky, where sports talk is off-limits!</p>
-           
-            <h3>Discover</h3>
-            <p>Discover how to genuinely have other plans and enjoy various activities without involving sports...</p>
-            <h1>Plumstead Jumble Trail 29th June 2024</h1>
-            <h1>VOTE 4th July 2024</h1>
-            <h1>St.Margets Fair 6th July 2024</h1>
-            <h1>Caffe Mad Saturday 6th July, join us for the best house night in St Margarets.</h1>
-        </section>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>We created this blog to provide a safe space for those who prefer geek culture over sports.</p>
-        </section>
-        <section id="blog">
-            <h2>Latest Blog Posts</h2>
-            <!-- Your articles go here -->
-        </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>If you have any questions or just want to say hi, reach out to us!</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 Don't Talk Sport. All rights reserved.</p>
-    </footer>
+
+    <div class="modern">
+        <div class="container">
+            <h1>Don't Talk Sport</h1>
+            <p class="coming-soon">Coming Soon</p>
+            <p>Stay tuned for exciting new content!</p>
+        </div>
+    </div>
+
+    <div class="image-bg">
+        <div class="container">
+            <h1>Don't Talk Sport</h1>
+            <p>Coming Soon</p>
+            <p>Stay tuned for exciting new content!</p>
+        </div>
+    </div>
+
+    <div class="gradient-bg">
+        <div class="container">
+            <h1>Don't Talk Sport</h1>
+            <p>Coming Soon</p>
+            <p>Stay tuned for exciting new content!</p>
+        </div>
+    </div>
+
 </body>
 </html>
